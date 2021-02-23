@@ -1,0 +1,35 @@
+image: markhobson/maven-chrome:jdk-11
+
+stages:
+  - build
+  - test
+
+services:
+- selenium/standalone-chrome:latest
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  selenium_remote_url: "http://selenium__standalone-chrome:4444/wd/hub/"
+
+
+cache:
+  paths:
+    - .m2/repository/
+
+build:
+  stage: build
+  script:
+    - mvn compile
+
+test:
+  stage: test
+  script:
+    - mvn test
+    
+  timeout: 3h 30m
+  artifacts:
+    when: always
+    paths:
+      - target
+      - screenshots
+    expire_in : 2 days 
