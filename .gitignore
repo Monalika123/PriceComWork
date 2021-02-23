@@ -1,1 +1,12 @@
 /target/
+
+.settings
+bin
+java
+resources
+screenshots
+.classpath
+.project
+debug.log
+cucumber.json
+output/Run_1614004491931
